@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl } from "react-bootstrap";
-import './../../css/Login.css';
+import './../css/components/Login.css';
 
 // This is a class that handles the login to the website, using a username and a password
 class Login extends Component {
@@ -42,6 +42,7 @@ class Login extends Component {
                     <FormGroup className="input" controlId="password" bsSize="large">
                         <FormControl type="password" placeholder="password" value={this.state.password} onChange={this.handleChange} />
                     </FormGroup>
+                    <a href="/">Lost your password?</a>
                     <Button block bsSize="large" disabled={!this.validateForm()} type="submit">Login</Button>
                 </form>
             </div>

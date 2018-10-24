@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import yummy_logo from './../../images/logo.png';
-import './../../css/Header.css';
+import yummy_logo from './../images/logo.png';
+import './../css/components/Header.css';
 
 class Header extends Component {
 

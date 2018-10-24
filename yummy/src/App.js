@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './components/header/Header'; 
-import Login from './components/login/Login'; 
+import Header from './components/Header'; 
+import Register from './components/Register'; 
 
 class App extends Component {
 
@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <div>
         <Header onSearchClick={this.onSearch} />
-        <Login/>
+        <Register />
       </div>
     );
   }

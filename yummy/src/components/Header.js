@@ -35,7 +35,9 @@ handleTextChange(event) {
                     <div className="search-container">
                     <form action="">
                         <input type="text" placeholder="Search.." name="txtSearch" onChange={this.handleTextChange} value={this.state.searchTerm} />
-                        <button type="submit" onClick={this.handleSearchSubmit}>Search</button>
+                        <button type="submit" onClick={this.handleSearchSubmit}>
+                            <FontAwesome name='fas fasearch' style={{ textShadow: '0 1px 0 rgba(0, 0, 0, 0.1)' }}/> 
+                        </button>
                     </form>
                     </div>
                 </div>

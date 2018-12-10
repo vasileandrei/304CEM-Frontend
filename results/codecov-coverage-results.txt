@@ -1,0 +1,19 @@
+  _____          _  
+ / ____|        | |  
+| |     ___   __| | ___  ___ _____   __  
+| |    / _ \ / _` |/ _ \/ __/ _ \ \ / /  
+| |___| (_) | (_| |  __/ (_| (_) \ V /  
+ \_____\___/ \__,_|\___|\___\___/ \_/  
+                                v3.1.0
+==> Detecting CI Provider
+    No CI Detected. Using git/mercurial
+==> Configuration: 
+    Endpoint: https://codecov.io
+{ commit: '775e1e25ba5be65dac861ff2c3d0a6d98fe35921',
+  branch: 'develop',
+  package: 'node-v3.1.0' }
+==> Building file structure
+==> Generating gcov reports (skip via --disable=gcov)
+    $ for /f "delims=" %g in ('dir /a-d /b /s *.gcno ') do gcov  %g
+    Failed to run gcov command.
+==> Scanning for reports

@@ -83,7 +83,7 @@ class Header extends Component {
 
     myFiles = (event) => {
         event.preventDefault();
-        window.location.replace('/files');
+        window.location.replace('/allPosts');
     }
 
     render = () => {

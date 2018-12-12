@@ -19,7 +19,7 @@ class Footer extends Component {
             userLinks =
             <div>
                 <li><a className='footer-item' href="/shareFile">Share File</a></li>
-                <li><a className='footer-item' href="/files">My Files</a></li>
+                <li><a className='footer-item' href="/allPosts">My Files</a></li>
             </div>;
             additionalUserLinks =
                 <li><a className='footer-item' href="/contact">Report bug</a></li>;

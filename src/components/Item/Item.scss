@@ -1,0 +1,124 @@
+$gray-darker:               #444444;
+$gray-dark:                 #696969;
+$gray:                      #999999;
+$gray_light:                #cccccc;
+$gray_lighter:              #ececec;
+$gray_lightest:             lighten($gray_lighter,4%);
+
+.cards__item,
+.cards__item::before,
+.cards__item::after { 
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+ 
+.cards__item {
+  display: flex;
+  padding: 1rem;
+  height: fit-content;
+  @media(min-width: 40rem) {
+    width: 50%;
+  }
+  @media(min-width: 56rem) {
+    width: 33%;
+  }
+}
+.card_meta {
+  flex: 1 1 auto;
+  max-height: 0;
+  overflow: hidden;
+  color: #666;
+  font-size: .78em;
+  text-transform: uppercase;
+  padding: 0 5%;
+  
+
+}
+.card {
+  z-index: 1;
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 20px -14px rgba(0, 0, 0, 0.555);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 20px 20px -14px rgba(0, 153, 255, 0.555);
+    .card__image {
+      filter: contrast(100%);
+    }
+    &:hover{
+      .card__content
+     .card_meta {
+        max-height: 6em;
+        transition: max-height 0.5s ease-in-out;
+      }
+    }
+  }
+}
+
+.card__content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 1rem;
+
+}
+
+.card__image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  
+  background-size: cover;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  filter: contrast(70%);
+  overflow: hidden;
+  align-self: center;
+  transition: filter 0.5s cubic-bezier(.43,.41,.22,.91);;
+ 
+  
+}
+
+.card__header{
+    flex: 1 1 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+   .header__up {
+        display: flex;
+        justify-content: space-between;
+        width: 95%;
+        flex-direction: row;
+        margin-right: 4%;
+        }
+    .header__down{
+            display: flex;
+            width: 95%;
+            flex-direction: row;
+            align-content: space-between;
+        }
+}
+.card__title {
+  color: $gray-dark;
+  font-size: 1.25rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.card__text {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+
+

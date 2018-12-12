@@ -56,7 +56,7 @@ function getFileName(currentName) {
  * @param {string} category
  * @returns []
  */
-export default function(action, files, condition, title, description, location, price, category) {
+export default function(action, files, condition, title, description, location, price, category, authorName) {
     // Upload new file
     if (action === FILE_UPLOAD_REQ) {
         return new Promise((resolve, reject) => {
@@ -90,7 +90,8 @@ export default function(action, files, condition, title, description, location, 
                 description,
                 location,
                 price,
-                category
+                category,
+                authorName
             })
             .then(res => {
                 if (res.data.hasBeenSuccessful === true) {

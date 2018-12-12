@@ -11,6 +11,8 @@ import Home from './components/Home/Home';
 import FileShare from './components/FileShare/FileShare';
 import Contact from './components/Contact/Contact';
 import Profile from './components/Profile/Profile';
+import ItemsList from './components/Files/Files';
+import ItemDisplay from './components/ItemDetails/ItemDetails';
 
 class App extends Component {
 
@@ -31,6 +33,8 @@ class App extends Component {
             <div>
                 <Header toast={this.notify} />
                 <Route exact path="/" component={Home} />
+                <Route path="/allPosts" component={ItemsList} />
+                <Route path="/allPosts/:id" component={ItemDisplay} />
                 <Route path="/loginAndRegister" component={LoginAndRegister} />
                 <Route path="/shareFile" component={MainPage} />
                 <Route path="/getFile/:id" component={FileShare} />

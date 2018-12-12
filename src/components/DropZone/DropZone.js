@@ -4,17 +4,15 @@ import { SyncLoader } from 'react-spinners';
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
 import { logout } from './../../actions/authActions';
-import { setCurrentUser } from './../../actions/authActions';
-import { store } from './../../index';
 import PropTypes from 'prop-types';
-import setAuthorizationToken from './../../utils/setAuthorizationToken';
-import generateToken from './../../utils/generateToken';
 import DropZoneReact from 'react-dropzone';
 import uploadReq from './../../actions/axiosFileReq';
 import fileIcon from './images/file.png';
 import backButton from './images/arrow.png';
 import './DropZone.scss';
 
+const imageLimit = 6;
+const tempList = [];
 
 class DropZone extends Component {
 
@@ -95,6 +93,12 @@ class DropZone extends Component {
         });
     }
 
+    processNewList = (list) => {
+        list.forEach(function(item) {
+            tempList.push(item);
+        });
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
         this.showFlashMessage();
@@ -111,30 +115,22 @@ class DropZone extends Component {
         }
     }
 
-    async appendToRedux(fileInfo) {
-        // Remember user
-        const index = this.props.auth.user.userInfo.files.length;
-        this.props.auth.user.userInfo.files[index] = fileInfo;
-        const userInfo = this.props.auth.user;
-
-        // Logout
-        this.props.logout();
-
-        // Generate and restore Redux store, local storage and session storage
-        const newToken = await generateToken(userInfo);
-        localStorage.setItem('jwtToken', newToken);
-        setAuthorizationToken(userInfo);
-        store.dispatch(setCurrentUser(userInfo));
-    }
-
     async uploadFile(file) {
-        const response = await uploadReq('file_upload', file);
-        this.setState({
-            uploadedFiles: response
-        });
-        this.setState({
-            loading: false
-        });
+        let response = await uploadReq('file_upload', file);
+        if ((tempList.length > imageLimit)) {
+            this.showFlashMessage();
+            this.setState({
+                message: 'You can upload up to 6 images',
+                loading: false
+            });
+        } else {
+            this.processNewList(response);
+            this.showFlashMessage();
+            this.setState({
+                message: 'Successfully uploaded file',
+                loading: false
+            });
+        }
     }
 
     async upload() {
@@ -147,10 +143,11 @@ class DropZone extends Component {
         const location = this.state.location;
         const price = this.state.price;
         const category = this.state.category;
-        const files = this.state.uploadedFiles;
+        const files = tempList;
+        const authorName = this.props.auth.user.userInfo.username;
 
         const response = await uploadReq('upload', files, condition, title,
-        description, location, price, category);
+        description, location, price, category, authorName);
         if (response) {
             this.showFlashMessage();
             this.setState({
@@ -159,10 +156,6 @@ class DropZone extends Component {
             if (response[redirectIndex] === true) {
                 console.log('redirect now');
             }
-            // this.appendToRedux(currentFile);
-            // if (response[redirectIndex]){
-            //     window.location.replace(`/getFile/${currentFile._id}`);
-            // }
         } else {
             this.setState({
                 message: 'Internal server problems'

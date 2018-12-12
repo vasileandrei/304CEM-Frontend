@@ -1,11 +1,16 @@
 import React   from 'react';
 import PropTypes from 'prop-types';
+import { Image } from 'react-bootstrap';
+import testImage from './images/videoCard.jpg';
 import './Item.scss';
 
 const Item=(props)=>{
   return (
     <div onClick={props.click} className='cards__item'>
     <div className='card'>
+      <div className='card__image'>
+        <Image src={testImage}></Image>
+      </div>
       <div className='card__image'>
         {/* <Image src={require('../../images/test_photo.jpg')}></Image> */}
       </div>

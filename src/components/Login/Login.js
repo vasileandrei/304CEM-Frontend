@@ -50,18 +50,6 @@ class Login extends Component {
         }
     }
 
-    toggleRememberLogin = (event) => {
-        const target = event.target;
-        // event.preventDefault();
-        // this.setState({
-        //     rememberMeLogin: !this.state.rememberMeLogin
-        // });
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        this.setState({
-            rememberMeLogin: value
-        });
-    }
-
     // handle changes in the two fields
     handleChange = (event) => {
         event.preventDefault();
@@ -98,7 +86,7 @@ class Login extends Component {
             loading: false
         });
         if (response[redirectIndex] === true) {
-            window.location.replace('/shareFile');
+            window.location.replace('/allPosts');
         }
     }
 

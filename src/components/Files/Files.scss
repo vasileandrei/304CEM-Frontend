@@ -23,19 +23,13 @@
   
   }
   .parent_container_web{
+    margin-top: 40px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     height: 100vh;
     width: 100vw;
-  
-  
   }
-  
-  // .font_h1{
-  //   font-size: $h1_responsive
-  // }
-
 
   .left_container_web{
     display: flex;
@@ -130,9 +124,8 @@
     display: flex;
     
   }
-  .special_input
-  { 
-    
+  
+  .special_input {  
     height: 100%;
     width: 100%;
     color:rgba(0, 0, 0,0.8);;

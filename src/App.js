@@ -6,7 +6,7 @@ import LoginAndRegister from './apps/LoginAndRegister/LoginAndRegister';
 import MainPage from './apps/MainPage/MainPage';
 
 import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
+// import Footer from './components/Footer/Footer';
 import Home from './components/Home/Home';
 import FileShare from './components/FileShare/FileShare';
 import Contact from './components/Contact/Contact';
@@ -40,7 +40,7 @@ class App extends Component {
                 <Route path="/getFile/:id" component={FileShare} />
                 <Route path="/contact" component={Contact} />
                 <Route path="/myProfile" component={Profile} />
-                <Footer />
+                {/* <Footer /> */}
             </div>
             </BrowserRouter>
         );

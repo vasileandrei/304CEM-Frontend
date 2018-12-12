@@ -74,13 +74,15 @@ img {
 }
 
 .card__image {
+  margin: 1rem;
+
   background-position: center center;
   background-repeat: no-repeat;
   
   background-size: cover;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
-  filter: contrast(70%);
+  filter: contrast(85%);
   overflow: hidden;
   align-self: center;
   transition: filter 0.5s cubic-bezier(.43,.41,.22,.91);;
@@ -89,22 +91,23 @@ img {
 }
 
 .card__header{
-    flex: 1 1 auto;
+  padding: 1rem;    
+  flex: 1 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .header__up {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
     flex-direction: row;
-    flex-wrap: wrap;
-   .header__up {
-        display: flex;
-        justify-content: space-between;
-        width: 95%;
-        flex-direction: row;
-        margin-right: 4%;
-        }
-    .header__down{
-            display: flex;
-            width: 95%;
-            flex-direction: row;
-            align-content: space-between;
-        }
+    margin-right: 4%;
+  }
+  .header__down{
+    display: flex;
+    width: 95%;
+    flex-direction: row;
+    align-content: space-between;
+  }
 }
 .card__title {
   color: $gray-dark;

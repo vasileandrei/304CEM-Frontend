@@ -7,7 +7,7 @@ import './Files.scss';
 
 const mobileThreshHold = 100;
 
-class MainDashboard extends Component{
+class Files extends Component{
 
 constructor(){
     super();
@@ -131,7 +131,7 @@ constructor(){
         <div className='cards_list'>
           {this.state.postsList.map((item,index) =>
             <Item click={()=>this.AccessItemDetails(index)} key={item._id} value={item}></Item>
-          )};
+          )}
         </div>
       </div>
     </div>;
@@ -158,10 +158,10 @@ constructor(){
   }
 }
 
-MainDashboard.propTypes = {
+Files.propTypes = {
   history: PropTypes.object.isRequired
 };
 
 
 
-export default MainDashboard;
+export default Files;

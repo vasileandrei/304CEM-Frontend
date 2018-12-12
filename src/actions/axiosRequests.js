@@ -40,8 +40,8 @@ export default function(action, username, password, email) {
             .then(res => {
                 if (res.data.hasBeenSuccessful === true){
                     redirect = true; // Boll if redirect to next page of response
-                    message = res.data.body.message; // Mesage to be displayed
-                    const token = res.data.body.token; // Generated token
+                    message = res.data.content.message; // Mesage to be displayed
+                    const token = res.data.content.result.token; // Generated token
                     localStorage.setItem('jwtToken', token); // Set token to localStore
                     setAuthorizationHeader(token); // Append token to Redux Store
                 } else if (res.data.errors.statusCode === notFoundStatus){

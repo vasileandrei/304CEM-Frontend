@@ -10,29 +10,43 @@ class ItemDetails extends Component {
       super();
 
       this.state = {
-        modalIsOpen: false
+          currentItem: '',
+          modalIsOpen: false,
+          offerModal: false
       };
 
       this.afterOpenModal = this.afterOpenModal.bind(this);
       this.onCloseModal = this.onCloseModal.bind(this);
     }
 
-    afterOpenModal() {
+    afterOpenModal = () => {
       this.subtitle.style.color = '#f00';
     }
-    componentDidMount(){
+
+    componentDidMount = () => {
         this.setState({
-            modalIsOpen: this.props.location.state.modalOpen
+            modalIsOpen: this.props.location.state.modalOpen,
+            currentItem: this.props.location.state.itemPressed
+        });
+
+    }
+
+    onCloseModal = () => {
+        this.setState({modalIsOpen: false});
+        this.props.history.push({
+            pathname:'/allPosts'
         });
     }
 
-    onCloseModal() {
-      this.setState({modalIsOpen: false});
-      this.props.history.push({
-        pathname:'/allPosts'
-
-       });
-    }
+    makeOffer = () => {
+        this.props.history.push({
+        pathname:'/allPosts/' + this.state.currentItem._id + '/makeOffer',
+        state:{
+            offerItemPressed: this.state.currentItem,
+            offerModal: true
+            }
+        });
+    };
 
     render() {
         return (
@@ -56,7 +70,7 @@ class ItemDetails extends Component {
                                 <p className='modal__card__text'>This is the shorthand for flex-grow, flex-shrink and flex-basis combined. The second and third parameters (flex-shrink and flex-basis) are optional. Default is 0 1 auto. </p>
                                 <div className='modal__buttons_container'>
                                     <Button className='modal__button'>Add to Fav</Button>
-                                    <Button className='modal__button'>Make Offer</Button>
+                                    <Button className='modal__button' onClick={this.makeOffer}>Make Offer</Button>
                                     <Button className='modal__button'>Send  Message</Button>
                                 </div>
                             </div>
@@ -68,9 +82,9 @@ class ItemDetails extends Component {
       }
   }
 
-  ItemDetails.propTypes = {
+ItemDetails.propTypes = {
     history: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired
-  };
+};
 
-  export default ItemDetails;
+export default ItemDetails;

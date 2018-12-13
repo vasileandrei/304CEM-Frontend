@@ -1,4 +1,5 @@
-/* eslint-disable no-restricted-globals */
+/* eslint-disable max-len */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ResizeAware from 'react-resize-aware';
@@ -104,16 +105,13 @@ constructor(){
             status:'Pending'
           }
         ]
-      },
-
-    );
+      });
     this.setState({
       postsList: testpostsList
     });
   }
 
   AccessItemDetails(itemIndex){
-    event.preventDefault();
     let showThisItemDetails = this.state.postsList[itemIndex];
     this.props.history.push({
       pathname:'/allPosts/' + showThisItemDetails._id,

@@ -11,8 +11,6 @@ const headers = {
     }
 };
 
-const notFoundStatus = 404;
-
 /**
  * IF LOGIN_REQ    - Login Request
  * IF REGISTER_REQ - Register Reaquest
@@ -34,7 +32,6 @@ export default function(action, username, password, email) {
             axios.post(api_uri, {
                 username,
                 password,
-                headers,
                 json: true
             })
             .then(res => {
@@ -44,7 +41,7 @@ export default function(action, username, password, email) {
                     const token = res.data.content.result.token; // Generated token
                     localStorage.setItem('jwtToken', token); // Set token to localStore
                     setAuthorizationHeader(token); // Append token to Redux Store
-                } else if (res.data.errors.statusCode === notFoundStatus){
+                } else {
                     message = 'Username and password don\'t match';
                 }
                 resolve([message, redirect]);

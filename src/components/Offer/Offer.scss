@@ -5,6 +5,14 @@
 .offers__item::after { 
     box-sizing: border-box;
 }
+
+.greenStatus {
+    color: green;
+}
+
+.orangeStatus {
+    color: orange;
+}
  
 .offers__item {
     display: flex;

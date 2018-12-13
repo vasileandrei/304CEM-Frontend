@@ -4,20 +4,21 @@ import { ListGroup } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import getPosts from '../../actions/axiosPostsReq';
 import getOffers from '../../actions/axiosOfferReq';
-import Offer from './../Offer/Offer';
-import './UserOffer.scss';
+import Offer from '../Offer/Offer';
+import './UserItems.scss';
 
 const messageIndex = 0;
 const dataIndex = 1;
 
-class UserOffer extends Component{
+class UserItems extends Component{
     constructor() {
         super();
 
         this.state = {
             postsList: [],
             offersList: [],
-            sendToOfferComponent: false
+            sendToOfferComponent: false,
+            offerStatus: ''
         };
 
 		this.showFlashMessage = (event) => this._showFlashMessage(event);
@@ -61,20 +62,26 @@ class UserOffer extends Component{
 
     combineResults = () => {
         const posts = this.state.postsList;
-        const offers = this.state.offersList;
+        const pendingOffers = this.state.offersList.pendingList;
+        const acceptedOffers = this.state.offersList.acceptedList;
         for (let i=0; i < posts.length; i++) {
-            for (let j=0; j < offers.length; j++) {
-                if (posts[i]._id === offers[j].postId) {
-                    posts[i].offers = offers[j].offers;
+            for (let j=0; j < pendingOffers.length; j++) {
+                if (posts[i]._id === pendingOffers[j].postId) {
+                    posts[i].offerStatus = 'Pending';
+                    posts[i].offers = pendingOffers[j].offers;
+                } else if (posts[i]._id === acceptedOffers[j].postId) {
+                    posts[i].offerStatus = 'Accepted';
+                } else {
+                    posts[i].offerStatus = 'Bought';
                 }
             }
         }
     }
 
-    openAllOffersModal = (itemIndex) => {
-        let showThisItemDetails = this.state.postsList[itemIndex];
+    openAllOffersModal = (index) => {
+        const showThisItemDetails = this.state.postsList[index];
         this.props.history.push({
-        pathname:'/myOffers/' + showThisItemDetails._id,
+        pathname:'/myItems/' + showThisItemDetails._id,
         state:{
             itemPressed: showThisItemDetails,
             modalOpen: true
@@ -88,7 +95,7 @@ class UserOffer extends Component{
             offerComponent =
                 <ListGroup className='list__content'>
                     {this.state.postsList.map((item, index) =>
-                        <Offer className='offer__item' click={()=>this.openAllOffersModal(index)} key={item._id} value={item} />
+                        <Offer click={() => this.openAllOffersModal(index)} className='offer__item' key={item._id} value={item} />
                     )}
                 </ListGroup>;
         }
@@ -100,7 +107,7 @@ class UserOffer extends Component{
     }
 }
 
-UserOffer.propTypes = {
+UserItems.propTypes = {
     history: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired
@@ -112,4 +119,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(UserOffer);
+export default connect(mapStateToProps)(UserItems);

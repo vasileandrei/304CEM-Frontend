@@ -13,8 +13,9 @@ import Contact from './components/Contact/Contact';
 import Profile from './components/Profile/Profile';
 import ItemsList from './components/Files/Files';
 import ItemDisplay from './components/ItemDetails/ItemDetails';
-import OfferModal from './components/OfferModal/OfferModal';
-import UserOffers from './components/UserOffer/UserOffer';
+import SendOfferModal from './components/SendOfferModal/SendOfferModal';
+import UserItems from './components/UserItems/UserItems';
+import CheckOneOffer from './components/CheckOneOffer/CheckOneOffer';
 
 class App extends Component {
 
@@ -38,9 +39,10 @@ class App extends Component {
                 <Route path="/loginAndRegister" component={LoginAndRegister} />
                 <Route path="/allPosts" component={ItemsList} />
                 <Route path="/allPosts/:id" component={ItemDisplay} />
-                <Route path="/allPosts/:id/makeOffer" component={OfferModal} />
+                <Route path="/allPosts/:id/makeOffer" component={SendOfferModal} />
                 <Route path="/postItem" component={MainPage} />
-                <Route path="/myOffers" component={UserOffers} />
+                <Route path="/myItems" component={UserItems} />
+                <Route path="/myItems/:id" component={CheckOneOffer} />
                 <Route path="/getFile/:id" component={FileShare} />
                 <Route path="/contact" component={Contact} />
                 <Route path="/myProfile" component={Profile} />

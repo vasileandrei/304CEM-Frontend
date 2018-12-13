@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { Button, FormGroup, FormControl } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import Modal from 'react-responsive-modal';
-import addOffer from './../../actions/axiosOfferReq';
-import './OfferModal.scss';
+import addOffer from '../../actions/axiosOfferReq';
+import './SendOfferModal.scss';
 
 const lengthValidation = 0;
 
-class OfferModal extends Component{
+class SendOfferModal extends Component{
     constructor() {
         super();
 
@@ -136,7 +136,7 @@ class OfferModal extends Component{
       }
 }
 
-OfferModal.propTypes = {
+SendOfferModal.propTypes = {
     history: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired
@@ -148,4 +148,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(OfferModal);
+export default connect(mapStateToProps)(SendOfferModal);

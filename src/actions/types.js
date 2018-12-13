@@ -15,6 +15,7 @@ export const GET_ALL_POSTS = 'get_all_posts';
 
 export const ADD_OFFER = 'add_offer';
 export const GET_ALL_OFFERS = 'get_all_offers';
+export const ACCEPT_OFFER = 'accept_offer';
 
 export const CUSTOMER_EMAIL = 'customer';
 export const FEEDBACK_EMAIL = 'feedback';

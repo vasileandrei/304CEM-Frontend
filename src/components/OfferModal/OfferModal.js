@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, FormGroup, FormControl } from 'react-bootstrap';
-import { ToastContainer, toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import Modal from 'react-responsive-modal';
 import addOffer from './../../actions/axiosOfferReq';
@@ -54,14 +53,6 @@ class OfferModal extends Component{
 		});
     }
 
-    notify = () => {
-        if (this.state.boxText) {
-            toast('Successfully copied to clipboard', { className: 'toast' });
-        } else {
-            toast('There is no text to add to clipboard', { className: 'toast' });
-        }
-    }
-
     // handle changes in the two fields
     handleChange = (event) => {
         event.preventDefault();
@@ -111,12 +102,6 @@ class OfferModal extends Component{
         return (
           <div>
             <Modal closeOnOverlayClick={true} open={this.state.modalIsOpen} onClose={this.onCloseModal} center>
-                <ToastContainer
-                    autoClose={2500}
-                    pauseOnHover={false}
-                    hideProgressBar={true}
-                    className='toast'
-                />
                 <div className='modal__offer__cards__item'>
                     <div className='modal__offer__card'>
                         <div className='modal__offer_card__header'>

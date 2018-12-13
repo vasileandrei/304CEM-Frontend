@@ -14,6 +14,7 @@ import Profile from './components/Profile/Profile';
 import ItemsList from './components/Files/Files';
 import ItemDisplay from './components/ItemDetails/ItemDetails';
 import OfferModal from './components/OfferModal/OfferModal';
+import UserOffers from './components/UserOffer/UserOffer';
 
 class App extends Component {
 
@@ -34,11 +35,12 @@ class App extends Component {
             <div>
                 <Header toast={this.notify} />
                 <Route exact path="/" component={Home} />
+                <Route path="/loginAndRegister" component={LoginAndRegister} />
                 <Route path="/allPosts" component={ItemsList} />
                 <Route path="/allPosts/:id" component={ItemDisplay} />
                 <Route path="/allPosts/:id/makeOffer" component={OfferModal} />
-                <Route path="/loginAndRegister" component={LoginAndRegister} />
-                <Route path="/shareFile" component={MainPage} />
+                <Route path="/postItem" component={MainPage} />
+                <Route path="/myOffers" component={UserOffers} />
                 <Route path="/getFile/:id" component={FileShare} />
                 <Route path="/contact" component={Contact} />
                 <Route path="/myProfile" component={Profile} />

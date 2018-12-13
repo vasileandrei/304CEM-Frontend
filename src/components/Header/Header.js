@@ -7,12 +7,13 @@ import { logout } from './../../actions/authActions';
 import PropTypes from 'prop-types';
 import arrow from './images/rightArrow.png';
 import 'react-toastify/dist/ReactToastify.css';
-import './Header.css';
+import './Header.scss';
 
 class Header extends Component {
 
     constructor(props) {
         super(props);
+        this.myInput = React.createRef();
         this.state = {
             menuToggle: false,
             profileDiv: false,
@@ -78,7 +79,7 @@ class Header extends Component {
 
     shareFile = (event) => {
         event.preventDefault();
-        window.location.replace('/shareFile');
+        window.location.replace('/postFile');
     }
 
     myFiles = (event) => {
@@ -101,9 +102,9 @@ class Header extends Component {
                 </div>
                 <div className={this.state.profileDiv ? 'dropDown' : 'hidden'} onMouseLeave={this.displayProfile}>
                     <div className="profileDropDown">
-                        <div className="dropDownItem" onClick={this.shareFile}>Share File</div>
+                        <div className="dropDownItem" onClick={this.myFiles}>View all posts</div>
                         <div className="separator"></div>
-                        <div className="dropDownItem" onClick={this.myFiles}>My Files</div>
+                        <div className="dropDownItem" onClick={this.shareFile}>Post an item</div>
                         <div className="separator"></div>
                         <div className="dropDownItem" onClick={this.renderProfile}>Profile</div>
                         <div className="separator"></div>
@@ -113,9 +114,9 @@ class Header extends Component {
                 </div>
             </div>;
             menuItems =
-            <a className="menu-item" href="/shareFile">Share File
-                <img src={arrow} className="menu-arrow" alt="sideMenu arrow"></img>
-            </a>;
+                <a className="menu-item" href="/postItem">Post an item
+                    <img src={arrow} className="menu-arrow" alt="sideMenu arrow"></img>
+                </a>;
         }
 
         return (
@@ -145,6 +146,12 @@ class Header extends Component {
                         <img src={arrow} className="menu-arrow" alt="sideMenu arrow"></img>
                     </a>
                     <a className="menu-item" href="/loginAndRegister">Login or Register
+                        <img src={arrow} className="menu-arrow" alt="sideMenu arrow"></img>
+                    </a>
+                    <a className="menu-item" href="/myItems">My items
+                        <img src={arrow} className="menu-arrow" alt="sideMenu arrow"></img>
+                    </a>
+                    <a className="menu-item" href="/myOffers">My offers
                         <img src={arrow} className="menu-arrow" alt="sideMenu arrow"></img>
                     </a>
                     { menuItems }

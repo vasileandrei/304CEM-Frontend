@@ -154,7 +154,7 @@ class DropZone extends Component {
                 message: response[messageIndex]
             });
             if (response[redirectIndex] === true) {
-                console.log('redirect now');
+                window.location.replace('/allPosts');
             }
         } else {
             this.setState({

@@ -11,7 +11,10 @@ export const DOWNLOAD_REQ = 'download';
 
 export const DELETE_REQ = 'soft_delete';
 
+export const GET_ALL_POSTS = 'get_all_posts';
+
 export const ADD_OFFER = 'add_offer';
+export const GET_ALL_OFFERS = 'get_all_offers';
 
 export const CUSTOMER_EMAIL = 'customer';
 export const FEEDBACK_EMAIL = 'feedback';

@@ -10,6 +10,13 @@ $colour-5: #624CAB;
 $colour-6: 'empty';
 $colour-7: #000927;
 
+$gray-darker:               #444444;
+$gray-dark:                 #696969;
+$gray:                      #999999;
+$gray_light:                #cccccc;
+$gray_lighter:              #ececec;
+$gray_lightest:             lighten($gray_lighter,4%);
+
 $white: #ffffff;
 $color-hover: #bbb;
 $color-hover-light: rgb(236, 236, 236);

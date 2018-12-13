@@ -1,0 +1,14 @@
+@import "./../../common.scss";
+
+.list__content {
+    list-style-type: none;
+    margin-left: -20px;
+    margin-right: 20px;
+    .offer__item {
+        padding: 24px;
+        margin: 5px 0 10px 0;
+        border: 1px solid black;
+
+        @include box-and-shadow-list;
+    }
+}

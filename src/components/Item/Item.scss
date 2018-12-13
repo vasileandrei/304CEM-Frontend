@@ -1,9 +1,4 @@
-$gray-darker:               #444444;
-$gray-dark:                 #696969;
-$gray:                      #999999;
-$gray_light:                #cccccc;
-$gray_lighter:              #ececec;
-$gray_lightest:             lighten($gray_lighter,4%);
+@import "./../../common.scss";
 
 .cards__item,
 .cards__item::before,

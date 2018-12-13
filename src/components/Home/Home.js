@@ -20,9 +20,9 @@ class Home extends Component {
         window.location.replace('/loginAndRegister');
     }
 
-    shareFile = (event) => {
+    seePosts = (event) => {
         event.preventDefault();
-        window.location.replace('/shareFile');
+        window.location.replace('/allPosts');
     }
 
     render = () => {
@@ -32,8 +32,8 @@ class Home extends Component {
         if (isAuthenticated) {
             buttonToDisplay =
             <div>
-                <p className='welcomeMessage'>Welcome {userInfo.username}!</p>
-                <Button className="actionButtons" onClick={this.shareFile}>Share File</Button>
+                <p className='welcomeMessage'>Welcome back, {userInfo.username}!</p>
+                <Button className="actionButtons" onClick={this.seePosts}>See all posts</Button>
             </div>;
         } else {
             buttonToDisplay =

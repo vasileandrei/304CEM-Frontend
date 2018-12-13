@@ -1,7 +1,7 @@
 // Axios Request Offer
 
 import axios from 'axios';
-import { ADD_OFFER } from './types';
+import { ADD_OFFER, GET_ALL_OFFERS } from './types';
 
 const headers = {
     headers: {
@@ -20,7 +20,7 @@ const headers = {
  * @param {string} offerPrice
  * @returns bool
  */
-export default function deleteFile(action, postId, offerUser, offerMessage, offerPrice) {
+export default function OffersRequests(action, postId, offerUser, offerMessage, offerPrice) {
     if (action === ADD_OFFER) {
         return new Promise((resolve, reject) => {
             const api_uri = 'http://localhost:8080/api/v1/addOffer';
@@ -37,6 +37,27 @@ export default function deleteFile(action, postId, offerUser, offerMessage, offe
                     resolve(true);
                 }
                 resolve(false);
+            })
+            .catch(error => reject(error.message));
+        });
+    } else if (action === GET_ALL_OFFERS) {
+        let message;
+        let response;
+        return new Promise((resolve, reject) => {
+            const api_uri = 'http://localhost:8080/api/v1/getAllOffers';
+            axios.post(api_uri, {
+                username: offerUser,
+                headers,
+                json: true
+            })
+            .then(res => {
+                if (res.data.hasBeenSuccessful === true){
+                    message = true;
+                    response = res.data.content.result;
+                } else {
+                    message = false;
+                }
+                resolve([message, response]);
             })
             .catch(error => reject(error.message));
         });

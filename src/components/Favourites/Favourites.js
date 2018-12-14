@@ -33,6 +33,8 @@ constructor(){
         DrawerOpen:false
       }
     };
+
+    this.goToAllPosts = this.goToAllPosts.bind(this);
   }
 
   handleResize = ({ width }) =>{
@@ -108,11 +110,17 @@ constructor(){
         });
     }
 
+    goToAllPosts = () => {
+        this.props.history.push({
+                pathname:'/allPosts/'
+            });
+    }
+
     render() {
         let offerComponent = [];
         const emptyCanvas = <div>
             <h1 className='homeTitle'>No posts yet - be the first one</h1>
-            <Button className="actionButtons">Add new item</Button>
+            <Button className="actionButtons" onClick={this.goToAllPosts}>Browse for items</Button>
         </div>;
         if (this.state.postsList.length) {
         offerComponent =

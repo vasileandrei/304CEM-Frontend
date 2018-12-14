@@ -77,15 +77,28 @@ class UserItems extends Component{
         const posts = this.state.postsList;
         const pendingOffers = this.state.offersList.pendingList;
         const acceptedOffers = this.state.offersList.acceptedList;
+        const boughtOffers = this.state.offersList.boughtList;
+
+        console.log(pendingOffers.length);
+        console.log(this.state.offersList);
+
         for (let i=0; i < posts.length; i++) {
             for (let j=0; j < pendingOffers.length; j++) {
-                if (posts[i]._id === pendingOffers[j].postId) {
-                    posts[i].offerStatus = 'Pending';
-                    posts[i].offers = pendingOffers[j].offers;
-                } else if (posts[i]._id === acceptedOffers[j].postId) {
-                    posts[i].offerStatus = 'Accepted';
+                if (pendingOffers.length !== 0) {
+                    if (posts[i]._id === pendingOffers[j].postId) {
+                        posts[i].offers = pendingOffers[j].offers;
+                        posts[i].offerStatus = 'Pending';
+                    }
+                } else if (acceptedOffers.length !== 0) {
+                    if (posts[i]._id === acceptedOffers[j].postId) {
+                        posts[i].offerStatus = 'Accepted';
+                    }
+                } else if (boughtOffers.length !== 0) {
+                    if (posts[i]._id === boughtOffers[j].postId) {
+                        posts[i].offerStatus = 'Bought';
+                    }
                 } else {
-                    posts[i].offerStatus = 'Bought';
+                    posts[i].offerStatus = '';
                 }
             }
         }

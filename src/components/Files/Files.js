@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import LoadingOverlay from 'react-loading-overlay';
-// import BounceLoader from 'react-spinners/BounceLoader';
 import PropTypes from 'prop-types';
 import ResizeAware from 'react-resize-aware';
 import Item from './../Item/Item';

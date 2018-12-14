@@ -45,7 +45,7 @@ img {
   
   &:hover {
     cursor: pointer;
-    box-shadow: 0 20px 20px -14px rgba(0, 153, 255, 0.555);
+    box-shadow: 0 20px 20px -14px $colour-4;
     .card__image {
       filter: contrast(100%);
     }

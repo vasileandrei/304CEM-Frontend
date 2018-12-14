@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import ImageGallery from 'react-image-gallery';
 import PropTypes from 'prop-types';
 import Modal from 'react-responsive-modal';
 import favsRequest from './../../actions/axiosUserReq';
+import 'react-image-gallery/styles/css/image-gallery.css';
 import './ItemDetails.scss';
 
 const notEmpty = 0;
@@ -34,6 +36,7 @@ class ItemDetails extends Component {
       this.makeOffer = this.makeOffer.bind(this);
       this.addToFav = this.addToFav.bind(this);
       this.delFromFav = this.delFromFav.bind(this);
+      this.login = this.login.bind(this);
     }
 
     afterOpenModal = () => {
@@ -43,15 +46,21 @@ class ItemDetails extends Component {
     async componentDidMount() {
         this.setState({
             modalIsOpen: this.props.location.state.modalOpen,
-            currentItem: this.props.location.state.itemPressed,
-            favourites: this.props.auth.user.userInfo.favourites
+            currentItem: this.props.location.state.itemPressed
         });
 
-        await this.getAllFavs();
+        if (this.state.auth) {
+            this.setState({
+                favourites: this.props.auth.user.userInfo.favourites
+            });
 
-        this.setState({
-            stateFavList: favList
-        });
+            await this.getAllFavs();
+
+            this.setState({
+                stateFavList: favList
+            });
+        }
+
     }
 
     onCloseModal = () => {
@@ -103,14 +112,32 @@ class ItemDetails extends Component {
         await this.getAllFavs();
     }
 
+    login = (event) => {
+        event.preventDefault();
+        this.props.history.push({
+            pathname: '/loginAndRegister/'
+        });
+    }
+
     render() {
+        const { isAuthenticated } = this.props.auth;
         let buttonToDisplay;
+        let images = [];
+        let imagesRender;
         if (favList) {
             if (favList.indexOf(this.state.currentItem._id) >= notEmpty) {
                 buttonToDisplay = <Button className='modal__button' onClick={this.delFromFav}>Delete from Favourites</Button>;
             } else {
                 buttonToDisplay = <Button className='modal__button' onClick={this.addToFav}>Add to Favourites</Button>;
             }
+        }
+        if (this.state.currentItem.files){
+            this.state.currentItem.files.forEach(element => {
+                images.push({ thumbnail: element, original: element });
+            });
+            imagesRender = <ImageGallery items={images} />;
+        } else {
+            imagesRender = <Image src={ this.state.currentItem.files? this.state.currentItem.files[imgIndex]: ''} />;
         }
         return (
           <div>
@@ -127,15 +154,21 @@ class ItemDetails extends Component {
                                 </div>
                             </div>
                             <div className='modal__image'>
-                                <Image src={ this.state.currentItem.files? this.state.currentItem.files[imgIndex]: ''} />
+                            { imagesRender }
                             </div>
                             <div className='modal__card__content'>
                                 <p className='modal__card__text'>{this.state.currentItem.description}</p>
+                                { isAuthenticated?
                                 <div className='modal__buttons_container'>
                                     { buttonToDisplay }
                                     <Button className='modal__button' onClick={this.makeOffer}>Make Offer</Button>
-                                    <Button className='modal__button'>Send  Message</Button>
+                                    <Button className='modal__button'>Send Message</Button>
                                 </div>
+                                :
+                                <div className='modal__buttons_container'>
+                                    <Button className='modal__button' onClick={this.login}>Signup</Button>
+                                </div>
+                                }
                             </div>
                         </div>
                     </div>

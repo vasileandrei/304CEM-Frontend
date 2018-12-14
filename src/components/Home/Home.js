@@ -37,7 +37,7 @@ class Home extends Component {
             </div>;
         } else {
             buttonToDisplay =
-            <Button className="actionButtons" onClick={this.login}>Signup</Button>;
+                <Button className="actionButtons" onClick={this.seePosts}>See all posts</Button>;
         }
         return (
             <CSSTransition

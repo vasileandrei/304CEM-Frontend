@@ -1,7 +1,7 @@
 // Axios Request Posts
 
 import axios from 'axios';
-import { GET_ALL_POSTS, GET_ALL_POSTS_BY_ID, GET_ALL } from './types';
+import { ADD_TO_FAV, DEL_FROM_FAV, GET_FROM_FAV } from './types';
 
 const headers = {
     headers: {
@@ -10,23 +10,23 @@ const headers = {
 };
 
 /**
- * Get all the posts for one unique user
+ * Add a post to favourites
  *
  * @export
  * @param {string} action
  * @param {string} id
- * @param {Array} idList
+ * @param {string} postId
  * @returns bool
  */
-export default function getAllPosts(action, username, idList) {
-    if (action === GET_ALL_POSTS) {
+export default function getAllPosts(action, username, id) {
+    if (action === ADD_TO_FAV) {
         let message;
         let response;
         return new Promise((resolve, reject) => {
-            const api_uri = 'http://localhost:8080/api/v1/getAllPosts';
+            const api_uri = 'http://localhost:8080/api/v1/addToFav';
             axios.post(api_uri, {
-                colName: 'posts',
                 username,
+                id,
                 headers,
                 json: true
             })
@@ -41,13 +41,14 @@ export default function getAllPosts(action, username, idList) {
             })
             .catch(error => reject(error.message));
         });
-    } else if (action === GET_ALL_POSTS_BY_ID) {
+    } else if (action === DEL_FROM_FAV) {
         let message;
         let response;
         return new Promise((resolve, reject) => {
-            const api_uri = 'http://localhost:8080/api/v1/getAllPostsById';
-            axios.post(api_uri, {
-                idList,
+            const api_uri = 'http://localhost:8080/api/v1/delFav';
+            axios.put(api_uri, {
+                username,
+                id,
                 headers,
                 json: true
             })
@@ -62,13 +63,14 @@ export default function getAllPosts(action, username, idList) {
             })
             .catch(error => reject(error.message));
         });
-    } else if (action === GET_ALL) {
+    } else if (action === GET_FROM_FAV) {
         let message;
         let response;
         return new Promise((resolve, reject) => {
-            const api_uri = 'http://localhost:8080/api/v1/getAllPosts';
+            const api_uri = 'http://localhost:8080/api/v1/getFavs';
             axios.post(api_uri, {
                 username,
+                id,
                 headers,
                 json: true
             })

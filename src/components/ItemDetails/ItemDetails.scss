@@ -13,6 +13,10 @@ $gray_lightest:             lighten($gray_lighter,4%);
   box-sizing: border-box;
 }
 
+.favouriteText {
+    text-align: center;
+}
+
 .modal__buttons_container{
     width: 100%;
     .modal__button {
@@ -55,13 +59,9 @@ $gray_lightest:             lighten($gray_lighter,4%);
   }
 
   .modal__image {
-        @media(min-width: 30rem) {
-            position: absolute;
-            width: 40%;
-            right: 0;
-        }
         @media(min-width: 56rem) {
             position: relative;
+            max-width: 60%;
             width: 60%;
             margin: 0 20% 0 20%;
             transition: filter 0.5s cubic-bezier(.43,.41,.22,.91);

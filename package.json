@@ -16,6 +16,7 @@
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.6.3",
     "react-dropzone": "^7.0.1",
+    "react-loading-overlay": "^1.0.0",
     "react-radio-buttons": "^1.2.2",
     "react-redux": "^5.1.1",
     "react-resize-aware": "^2.7.1",

@@ -8,8 +8,8 @@ import backButton from './images/arrow.png';
 import './Register.css';
 
 const zero = 0;
-const minLength = 5;
-const passLength = 7;
+const minLength = 3;
+const passLength = 5;
 
 // This is a class that handles the registrationto the website,
 // It takes information about the user: username, password, email

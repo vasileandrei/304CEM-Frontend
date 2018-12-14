@@ -79,7 +79,7 @@ class Header extends Component {
 
     shareFile = (event) => {
         event.preventDefault();
-        window.location.replace('/postFile');
+        window.location.replace('/postItem');
     }
 
     myFiles = (event) => {
@@ -90,7 +90,7 @@ class Header extends Component {
     render = () => {
         const { isAuthenticated } = this.props.auth;
         let userLinks;
-        let menuItems;
+        let menuItems = [];
         const guestLinks =
         <Button className="actionButton" onClick={this.login}>Login</Button>;
         if (isAuthenticated) {
@@ -113,10 +113,19 @@ class Header extends Component {
                     </div>
                 </div>
             </div>;
-            menuItems =
-                <a className="menu-item" href="/postItem">Post an item
+            menuItems.push(
+                <a key={0} className="menu-item" href="/postItem">Post an item
                     <img src={arrow} className="menu-arrow" alt="sideMenu arrow"></img>
-                </a>;
+                </a>,
+                <a key={1} className="menu-item" href="/myItems">My items
+                    <img src={arrow} className="menu-arrow" alt="sideMenu arrow"></img>
+                </a>,
+                <a key={2} className="menu-item" href="/myOffers">My offers
+                    <img src={arrow} className="menu-arrow" alt="sideMenu arrow"></img>
+                </a>,
+                <a key={3} className="menu-item" href="/myFavourites">My favourites
+                    <img src={arrow} className="menu-arrow" alt="sideMenu arrow"></img>
+                </a>);
         }
 
         return (
@@ -133,7 +142,7 @@ class Header extends Component {
                         <div className="bar2"></div>
                         <div className="bar3"></div>
                     </div>
-                    <h1><a href="/">FileSharing</a></h1>
+                    <h1><a href="/">MyStuff</a></h1>
                     { isAuthenticated? userLinks : guestLinks }
                 </div>
                 <Menu
@@ -146,12 +155,6 @@ class Header extends Component {
                         <img src={arrow} className="menu-arrow" alt="sideMenu arrow"></img>
                     </a>
                     <a className="menu-item" href="/loginAndRegister">Login or Register
-                        <img src={arrow} className="menu-arrow" alt="sideMenu arrow"></img>
-                    </a>
-                    <a className="menu-item" href="/myItems">My items
-                        <img src={arrow} className="menu-arrow" alt="sideMenu arrow"></img>
-                    </a>
-                    <a className="menu-item" href="/myOffers">My offers
                         <img src={arrow} className="menu-arrow" alt="sideMenu arrow"></img>
                     </a>
                     { menuItems }

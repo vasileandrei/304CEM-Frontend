@@ -20,7 +20,7 @@ const headers = {
 export default function deleteFile(action, id) {
     if (action === DELETE_REQ) {
         return new Promise((resolve, reject) => {
-            const api_uri = `http://localhost:8080/GatewayApi/files/delDoc/${id}`;
+            const api_uri = `http://localhost:8080/api/v1/delDoc/${id}`;
             axios.put(api_uri, {
                 headers,
                 json: true

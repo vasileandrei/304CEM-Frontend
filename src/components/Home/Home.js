@@ -49,11 +49,12 @@ class Home extends Component {
                 <div className='body'>
                     <div className='background'>
                         <div className='content'>
-                            <h1 className='homeTitle'>Share files fast and secure</h1>
+                            <h1 className='homeTitle'>Post items fast and secure</h1>
                             <p className='paragraphText-big'>
-                                Create a free account, upload your favourite
-                                files to the website and share them using only
-                                a generated URL.
+                                Create a free account now and you can post your favourite
+                                items easy and quick. You can post any item, people browsing
+                                will bid for it and if you are happy you can sell it to them.
+                                Try it now!
                             </p>
                             {buttonToDisplay}
                         </div>

@@ -31,8 +31,7 @@ class DropZone extends Component {
 			buttonEnable: true,
             loading: false,
 			show: true,
-            appearLogin: true,
-            uploadedFiles: []
+            appearLogin: true
 		};
 
 		this.showFlashMessage = (event) => this._showFlashMessage(event);
@@ -168,7 +167,7 @@ class DropZone extends Component {
 
     render = () => {
         return (
-            <CSSTransition
+                <CSSTransition
                     in={this.state.appearLogin}
                     appear={true}
                     timeout={300}
@@ -236,6 +235,7 @@ class DropZone extends Component {
                     </form>
                 </div>
             </CSSTransition>
+
         );
     }
 }

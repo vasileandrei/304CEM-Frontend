@@ -1,18 +1,27 @@
 /* eslint-disable max-len */
 
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
+import LoadingOverlay from 'react-loading-overlay';
+// import BounceLoader from 'react-spinners/BounceLoader';
 import PropTypes from 'prop-types';
 import ResizeAware from 'react-resize-aware';
 import Item from './../Item/Item';
+import getAllPosts from './../../actions/axiosPostsReq';
 import './Files.scss';
 
 const mobileThreshHold = 100;
+
+const messageIndex = 0;
+const dataIndex = 1;
 
 class Files extends Component{
 
 constructor(){
     super();
     this.state = {
+      empty: true,
+      loading: true,
       isMobileDevice: false,
       openModal: false,
       postsList: [],
@@ -30,85 +39,18 @@ constructor(){
     }
   };
 
-  componentDidMount(){
-    let testpostsList=[];
-    testpostsList.push(
-      {
-        _id:'asddfa3e4e34fd',
-        authorId:'11122112112',
-        authorName:'Bogdan',
-        title:'Gtx 1070',
-        condition:'Perferct',
-        location:'Bucharest',
-        description:'This is the shorthand for flex-grow, flex-shrink and flex-basis combined. The second and third parameters (flex-shrink and flex-basis) are optional. Default is 0 1 auto.',
-        dateCreated:'21 Jan 2019',
-        images:['https://goo.gl/images/nsSPRa','34433'],
-        offers:[
-          {
-            _id:'dsgqwt4534243e',
-            requestName: 'Raluca',
-            reqPrice:150,
-            reqMessage:'this is a test message'
-          }
-        ]
-      },
-      {
-        _id:'asddfa3e4c34fd',
-        authorId:'343251554334',
-        authorName:'Gogoasa',
-        title:'Gtx 1060',
-        condition:'Good',
-        location:'Guatamala',
-        description:'This is the shorthand for flex-grow, flex-shrink and flex-basis combined. The second and third parameters (flex-shrink and flex-basis) are optional. Default is 0 1 auto.',
-        dateCreated:'08 Jan 2020',
-        images:['../../images/test_photo.jpg','34433'],
-        offers:[
-          {
-            _id:'dsgqwt4534243e',
-            requestName:'Raluca',
-            reqPrice:150,
-            reqMessage:'this is a test message',
-            status:'Pending'
-          },
-          {
-            _id:'dsgqwtd534243e',
-            requestName:'Gogu',
-            reqPrice:350,
-            reqMessage:'this is a test message',
-            status:'Pending'
-          }
-        ]
-      },
-      {
-        _id:'fasde43q45cfd',
-        authorId:'43124324321',
-        authorName:'Relu',
-        title:'Gtx 1060',
-        condition:'Used',
-        location:'France',
-        description:'This is the shorthand for flex-grow, flex-shrink and flex-basis combined. The second and third parameters (flex-shrink and flex-basis) are optional. Default is 0 1 auto.',
-        dateCreated:'21 Jan 2020',
-        images:['../../images/test_photo.jpg','34433'],
-        offers:[
-          {
-            _id:'dsgqwt4534243e',
-            requestName:'Raluca',
-            reqPrice:150,
-            reqMessage:'this is a test message',
-            status:'Pending'
-          },
-          {
-            _id:'dsgqwtd534243e',
-            requestName:'Gogu',
-            reqPrice:350,
-            reqMessage:'this is a test message',
-            status:'Pending'
-          }
-        ]
-      });
+  async componentDidMount() {
+
+    await this.getAllPosts();
+
+    if (this.state.postsList.length) {
+      this.setNotEmpty();
+    }
+
     this.setState({
-      postsList: testpostsList
+      loading: false
     });
+
   }
 
   AccessItemDetails(itemIndex){
@@ -122,36 +64,59 @@ constructor(){
      });
   }
 
+  async getAllPosts() {
+    const response = await getAllPosts('get_all_posts', 'posts');
+    if (response[messageIndex] === true) {
+      this.setState({
+          postsList: response[dataIndex]
+      });
+    }
+  }
+
+  postNewItem = () => {
+   this.props.history.push({
+      pathname:'/postItem/'
+    });
+  }
+
+  setNotEmpty = () => {
+    this.setState({
+      empty: false
+    });
+  }
+
   render() {
-    const webView =
-    <div className='parent_container_web'>
-      <div className='main_container_web'>
-        <div className='cards_list'>
-          {this.state.postsList.map((item,index) =>
-            <Item click={()=>this.AccessItemDetails(index)} key={item._id} value={item}></Item>
-          )}
-        </div>
-      </div>
+    let offerComponent = [];
+    const emptyCanvas = <div>
+        <h1 className='homeTitle'>No posts yet - be the first one</h1>
+        <Button className="actionButtons" onClick={this.postNewItem}>Add new item</Button>
     </div>;
-
-    const mobileView =
-    <div className="App">
-      <header className="App_header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>Hello here. Want to see the hot reload for mobileee </p>
-        <a className="App_link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>;
-
+    if (this.state.postsList.length) {
+      offerComponent =
+        <div className='parent_container_web'>
+          <div className='main_container_web'>
+            <div className='cards_list'>
+              {this.state.postsList.map((item,index) =>
+                <Item click={()=>this.AccessItemDetails(index)} key={item._id} value={item}></Item>
+              )}
+            </div>
+          </div>
+        </div>;
+    }
 
     return (
-      <ResizeAware onlyEvent onResize={this.handleResize}> {
-        this.state.isMobileDevice===false? webView : mobileView
-      } </ResizeAware>
+      <LoadingOverlay
+        active={this.state.loading}
+        className='mySpinner'
+        spinner
+        text="Loading"
+      >
+        <ResizeAware onlyEvent onResize={this.handleResize}> {
+          <div className='body'>
+              { this.state.empty? emptyCanvas: offerComponent }
+            </div>
+        } </ResizeAware>
+      </LoadingOverlay>
     );
   }
 }

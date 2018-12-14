@@ -3,17 +3,21 @@ import PropTypes from 'prop-types';
 import './Offer.scss';
 
 const Offer=(props)=>{
-    let numberOfOffers;
-    let statusValue;
-    if (props.value.offers.length) {
-        numberOfOffers = `(${props.value.offers.length})`;
+    if (props.value.type === 'userOffer') {
+        props.value.offerStatus = props.value.offers.status;
+        props.value.offers.length = 'Your offer';
     }
+    let statusValue;
+    if (typeof props.value.offers === 'undefined') {
+        props.value.offers = [];
+    }
+    const numberOfOffers = `(${props.value.offers.length})`;
     if (props.value.offerStatus === 'Accepted') {
         statusValue = <span className='greenStatus'>{props.value.offerStatus}</span>;
     } else if (props.value.offerStatus === 'Pending') {
         statusValue = <span className='orangeStatus'>{props.value.offerStatus}</span>;
     } else {
-        statusValue = <span className='greyStatus'>{props.value.offerStatus}</span>;
+        statusValue = <span className='greyStatus'>No Offers</span>;
     }
 
   return (

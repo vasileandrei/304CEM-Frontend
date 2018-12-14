@@ -4,19 +4,16 @@ import { ListGroup, Button } from 'react-bootstrap';
 import LoadingOverlay from 'react-loading-overlay';
 import PropTypes from 'prop-types';
 import getPosts from '../../actions/axiosPostsReq';
-import getOffers from '../../actions/axiosOfferReq';
+import getMyOffers from '../../actions/axiosMyOfferReq';
 import Offer from '../Offer/Offer';
-import './UserItems.scss';
-
-const notEmpty = 0;
+import './UserOffers.scss';
 
 const messageIndex = 0;
 const dataIndex = 1;
 
-class UserItems extends Component{
+class UserOffers extends Component{
     constructor() {
         super();
-
         this.state = {
             postsList: [],
             offersList: [],
@@ -30,13 +27,12 @@ class UserItems extends Component{
     }
 
     async componentDidMount() {
+        // Get all offers for current user
+        await this.getAllMyOffers();
         // Get all posts for current user
         await this.getAllPosts();
-        // Get all offers for current user
-        await this.getAllOffers();
         // Append offers to posts
         await this.combineResults();
-
         // Allow the page to render, we got all the data
         if (!this.state.sendToOfferComponent) {
             this.setState({
@@ -44,7 +40,8 @@ class UserItems extends Component{
             });
         }
 
-        if (this.state.postsList.length > notEmpty) {
+        // eslint-disable-next-line no-magic-numbers
+        if (this.state.postsList.length > 0) {
             this.setNotEmpty();
         }
 
@@ -53,19 +50,9 @@ class UserItems extends Component{
         });
     }
 
-    async getAllPosts() {
+    async getAllMyOffers() {
         const currentUser = this.props.auth.user.userInfo.username;
-        const response = await getPosts('get_all_posts', currentUser);
-        if (response[messageIndex] === true) {
-            this.setState({
-                postsList: response[dataIndex]
-            });
-        }
-    }
-
-    async getAllOffers() {
-        const currentUser = this.props.auth.user.userInfo.username;
-        const response = await getOffers('get_all_offers', '', currentUser);
+        const response = await getMyOffers('get_all_my_offers', currentUser);
         if (response[messageIndex] === true) {
             this.setState({
                 offersList: response[dataIndex]
@@ -73,19 +60,24 @@ class UserItems extends Component{
         }
     }
 
+    async getAllPosts() {
+        const myIdList = this.state.offersList;
+        const response = await getPosts('get_all_posts_by_id', '', myIdList);
+        if (response[messageIndex] === true) {
+            this.setState({
+                postsList: response[dataIndex]
+            });
+        }
+    }
+
     combineResults = () => {
         const posts = this.state.postsList;
-        const pendingOffers = this.state.offersList.pendingList;
-        const acceptedOffers = this.state.offersList.acceptedList;
+        const offers = this.state.offersList;
         for (let i=0; i < posts.length; i++) {
-            for (let j=0; j < pendingOffers.length; j++) {
-                if (posts[i]._id === pendingOffers[j].postId) {
-                    posts[i].offerStatus = 'Pending';
-                    posts[i].offers = pendingOffers[j].offers;
-                } else if (posts[i]._id === acceptedOffers[j].postId) {
-                    posts[i].offerStatus = 'Accepted';
-                } else {
-                    posts[i].offerStatus = 'Bought';
+            for (let j=0; j < offers.length; j++) {
+                if (posts[i]._id === offers[j].postId) {
+                    posts[i].offers = offers[j].offers;
+                    posts[i].type = 'userOffer';
                 }
             }
         }
@@ -94,19 +86,19 @@ class UserItems extends Component{
     openAllOffersModal = (index) => {
         const showThisItemDetails = this.state.postsList[index];
         this.props.history.push({
-        pathname:'/myItems/' + showThisItemDetails._id,
+        pathname:'/myOffers/' + showThisItemDetails._id,
         state:{
             itemPressed: showThisItemDetails,
             modalOpen: true,
-            type: '/myItems/'
+            type: '/myOffers/'
         }
         });
     }
 
-    postNewItem = () => {
+    goToAllPosts = () => {
         this.props.history.push({
-            pathname:'/postItem/'
-        });
+                pathname:'/allPosts/'
+            });
     }
 
     setNotEmpty = () => {
@@ -118,8 +110,8 @@ class UserItems extends Component{
     render() {
         let offerComponent;
         const emptyCanvas = <div>
-                <h1 className='homeTitle'>You have no items posted</h1>
-                <Button className="actionButtons" onClick={this.postNewItem}>Add new item</Button>
+                <h1 className='homeTitle'>You have no offers</h1>
+                <Button className="actionButtons" onClick={this.goToAllPosts}>Browse for items</Button>
             </div>;
         if (this.state.sendToOfferComponent) {
             offerComponent =
@@ -143,7 +135,7 @@ class UserItems extends Component{
     }
 }
 
-UserItems.propTypes = {
+UserOffers.propTypes = {
     history: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired
@@ -155,4 +147,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(UserItems);
+export default connect(mapStateToProps)(UserOffers);

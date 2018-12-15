@@ -1,0 +1,259 @@
+@import './../../common.scss';
+
+
+.dropZoneTitle {
+    text-align: center;
+    font-size: $med-home-text;
+    color: $colour-4;
+    margin: 8px 0 56px 0;
+}
+
+.inputField {
+    text-align: center;
+    font-size: $med-home-text;
+    color: $colour-4;
+    margin: 4px 0 8px 0;
+}
+
+.additem-form {
+    width: 80%;
+    height: 100%;
+    margin: 8px auto 30px;
+    padding: 10px;
+    position: relative; /* For the submit button positioning */
+    z-index: 1;
+
+    div {
+        text-align: center;
+    }
+    
+    /* Styles */
+    @include box-and-shadow;
+
+    .backButton {
+        position: absolute; /* For the icon positioning */
+        left: 0px;
+        margin: 1% 0 0 6%;
+        height: 28px;
+        width: 28px;
+        padding: 4px;
+        border-radius: 50%;
+        background: $white;
+        cursor: pointer;
+        @include box-and-shadow;
+        &:hover {
+            background-color: $color-hover-light;
+        }
+    }
+
+    .field {
+        position: relative; /* For the icon positioning */
+
+        img {
+            /* Size and position */
+            padding: 2px 0 2px 0;
+            margin-top: 8px;
+            left: 0px;
+            top: 0px;
+            position: absolute;
+            height: 30px;
+            width: 30px;
+        
+            /* Line */
+            border-right: 1px solid $shadow-1;
+            box-shadow: 1px 0 0 $shadow-4;
+        }
+    }
+
+    .input {
+        /* Fonts and Text */
+        font-family: $arial-font;
+        font-size: 13px;
+        font-weight: 400;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+    
+        /* Size and position */
+        width: 80%;
+        padding: 10px 18px 10px 45px;
+        margin-top: 8px;
+    
+        /* Styles */
+        @include box-and-shadow-light;
+        border: none; /* Remove the default border */
+        border-radius: 5px;
+        background: #f9f9f9;
+        color: #777;
+        transition: color 0.3s ease-out;
+
+        &:hover {
+            background-color: $color-hover-light;
+        }
+    }
+
+    .input.textArea {
+        text-align: left;
+        height: 64px;
+    }
+
+    .radioButtonDiv {
+        margin-bottom: 18px;
+        height: 32px;
+        button {
+            position: relative;
+            margin: 0 1% 0 1%;
+            width: 29%;
+            
+            .radioShadow {
+                position: absolute;
+                left: 0;
+                right: 0;
+                height: 5px;
+                margin: -2px 2px 0 2px;
+                background-color: $shadow-2;
+                z-index: -1;
+
+                @include box-and-shadow;
+            }
+        }
+    }
+
+    .dropDown {
+        width: 90%;
+        height: 32px;
+        margin: 0 5% 0 5%;
+
+        font-family: $arial-font;
+        font-size: 13px;
+        font-weight: 400;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+        
+        text-align-last: center;
+
+        @include box-and-shadow-list; 
+
+    }
+
+    button {
+        /* Size and position */
+        width: 100%;
+        height: 100%;
+        margin-top: 12px;
+    
+        /* Icon styles */
+        font-size: 1.2em;
+        line-height: 1.75;
+        color: $shadow-2;
+    
+        /* Styles */
+        border: none;
+        border-radius: 5px;
+        background: linear-gradient($colour-4-nine, $colour-4);
+        box-shadow: 
+            inset 0 1px 0 $shadow-6,
+            0 1px 2px $shadow-1,
+            inset 0 3px 2px $shadow-5,
+            inset 0 -3px 2px $shadow-1;
+    
+        cursor: pointer;
+
+        &:hover {
+            color: $color-hover;
+        }
+    }
+
+    a {
+        font-family: $lato-font;
+        font-size: $med-text;
+    }
+}
+
+.display {
+    
+    left: 0;
+    right: 0;
+    margin: -18px auto;
+    position: relative;
+    text-align: center;
+    z-index: 1;
+    
+    .fadeOut {
+        opacity: 1;
+        visibility: visible;
+        animation: FadeAnimation 1.5s ease-in 1.25s forwards;
+    }
+    
+    .fadeOut2 {
+        opacity: 1;
+        visibility: visible;
+        animation: FadeAnimation2 1.5s ease-in 1.25s forwards;
+    }
+
+    .button {
+        /* Size and position */
+        margin-top: 28px;
+        width: 98px;
+        height: 48px;
+        // position: absolute; /* For the submit button positioning */
+    
+        /* Icon styles */
+        font-size: $med-high-text;
+        line-height: 1.75;
+        color: $shadow-2;
+    
+        /* Styles */
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        background: linear-gradient($colour-4-nine, $colour-4);
+        box-shadow: 
+        inset 0 1px 0 $shadow-6,
+        0 1px 2px $shadow-1,
+        inset 0 3px 2px $shadow-5,
+        inset 0 -3px 2px $shadow-1;
+    
+        &:hover {
+            color: $color-hover;
+        }
+    }
+
+}
+
+.drop-zone {
+
+    width: 90%;
+    height: 112px;
+    margin: 24px auto 30px auto;
+    position: relative; /* For the submit button positioning */
+    text-align: center;
+    cursor: pointer;
+    z-index: 1;
+
+    a {
+        font-family: $lato-font;
+        color: black;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+    }
+
+    h3 {
+        margin-top: 0;
+    }
+
+    div {
+        /* Size & position */
+        @include box-and-shadow;
+        height: 100%;
+        width: 100%;
+        background-color: $colour-3;
+        border: $light-border;
+
+        font-family: $lato-font;
+        color: $white;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+        
+        img {
+            margin-top: 0;
+            height: 72px;
+            width: 56x;
+        }
+    }
+}
